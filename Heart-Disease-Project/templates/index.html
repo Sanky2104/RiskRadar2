@@ -3,9 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Liver Disease Prediction Model</title>
+    <title>Heart Prediction Model</title>
     <style>
-        /* Styling the tooltip container and text */
+        /* Background Image */
+        body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7EIu46idMkgDwcwN9K9jrIsjOJPcWyKxhsg&s");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Heading Font */
+        .container-heading {
+            margin: 0;
+        }
+
+        .heading_font {
+            color: black;
+            font-family: 'Pacifico', cursive;
+            font-size: 50px;
+            font-weight: normal;
+        }
+
+        /* Box Styles */
+        input {
+            border-radius: 14px;
+            height: 25px;
+            width: 200px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Submit Button */
+        #sub {
+            width: 120px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+
+        /* Tooltip Styles */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -15,14 +62,14 @@
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 250px;
-            background-color: #6c757d;
+            background-color: #555;
             color: #fff;
             text-align: center;
-            border-radius: 5px;
-            padding: 5px;
+            border-radius: 6px;
+            padding: 10px;
             position: absolute;
             z-index: 1;
-            bottom: 100%;
+            bottom: 125%;
             left: 50%;
             margin-left: -125px;
             opacity: 0;
@@ -34,121 +81,96 @@
             opacity: 1;
         }
 
-        /* Input styling */
-        input {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            margin-bottom: 15px;
-            padding-left: 10px;
-        }
-
-        /* Button Styling */
-        #sub {
-            width: 120px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        /* Hover Effect for Submit Button */
-        #sub:hover {
-            background-color: #45a049;
-            transform: scale(1.05); /* Button grows on hover */
-        }
-
-        /* Button active effect */
-        #sub:active {
-            transform: scale(0.95);
+        .tooltip .tooltiptext::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h2 class='container-heading'><span class="heading_font">Liver Disease Prediction</span></h2>
+        <h2 class="container-heading"><span class="heading_font">Heart Disease Prediction</span></h2>
     </div>
 
     <div class="ml-container">
         <form action="{{ url_for('predict') }}" method="POST">
+            <br>
+            <h3 class="tooltip">Age
+                <span class="tooltiptext">Enter your age in years (e.g., 45).</span>
+            </h3>
+            <input id="first" name="age" placeholder="in Year" required="required">
+            <br>
+            <h3 class="tooltip">Sex
+                <span class="tooltiptext">Specify your sex: Male = 1, Female = 0.</span>
+            </h3>
+            <input id="second" name="sex" placeholder="Male = 1, Female=0" required="required">
+            <br>
+            <h3 class="tooltip">Chest Pain Type
+                <span class="tooltiptext">Types: 1 = Typical Angina, 2 = Atypical Angina, 3 = Non-Anginal Pain, 4 = Asymptomatic.</span>
+            </h3>
+            <input id="third" name="cp" placeholder="Ex: 1,2,3,4" required="required">
+            <br>
+            <h3 class="tooltip">Resting Blood Pressure
+                <span class="tooltiptext">Your resting blood pressure (in mmHg).</span>
+            </h3>
+            <input id="fourth" name="trestbps" placeholder="(mm)" required="required">
+            <br>
+            <h3 class="tooltip">Serum Cholesterol
+                <span class="tooltiptext">Cholesterol level in mg/dl.</span>
+            </h3>
+            <input id="fifth" name="chol" placeholder="(mg/dl)" required="required">
+            <br>
+            <h3 class="tooltip">Fasting Blood Sugar
+                <span class="tooltiptext">Fasting blood sugar > 120 mg/dl? 1 = Yes, 0 = No.</span>
+            </h3>
+            <input id="sixth" name="fbs" placeholder="(1 = true; 0 = false)" required="required">
+            <br>
+            <h3 class="tooltip">Resting Electrocardiographic Results
+                <span class="tooltiptext">Values: 0 = Normal, 1 = ST-T wave abnormality, 2 = Probable or definite left ventricular hypertrophy.</span>
+            </h3>
+            <input id="seventh" name="restecg" placeholder="(values 0,1,2)" required="required">
+            <br>
+            <h3 class="tooltip">Maximum Heart Rate Achieved
+                <span class="tooltiptext">The highest heart rate achieved during the exercise test.</span>
+            </h3>
+            <input id="eight" name="thalach" placeholder="Maximum Heart Rate Achieved" required="required">
+            <br>
+            <h3 class="tooltip">Exercise Induced Angina
+                <span class="tooltiptext">Exercise-induced chest pain? 1 = Yes, 0 = No.</span>
+            </h3>
+            <input id="ninth" name="exang" placeholder="(1 = yes; 0 = no)" required="required">
+            <br>
+            <h3 class="tooltip">Oldpeak
+                <span class="tooltiptext">ST depression induced by exercise relative to rest.</span>
+            </h3>
+            <input id="tenth" name="oldpeak" placeholder="ST depression induced by exercise relative to rest" required="required">
+            <br>
+            <h3 class="tooltip">Slope
+                <span class="tooltiptext">Slope of the peak exercise ST segment.</span>
+            </h3>
+            <input id="eleventh" name="slope" placeholder="Peak Exercise ST segment" required="required">
+            <br>
+            <h3 class="tooltip">CA
+                <span class="tooltiptext">Number of major vessels (0-3) colored by fluoroscopy.</span>
+            </h3>
+            <input id="twelfth" name="ca" placeholder="No. of major vessels 0-3 colored by fluoroscopy" required="required">
+            <br>
+            <h3 class="tooltip">Thal
+                <span class="tooltiptext">Thalassemia: 0 = Normal, 1 = Fixed Defect, 2 = Reversible Defect.</span>
+            </h3>
+            <input id="thirteenth" name="thal" placeholder="0=Normal; 1=FixedDefect; 2=ReversableDefect" required="required">
             <br><br>
-
-            <!-- Age -->
-            <label for="age" class="tooltip">Age
-                <span class="tooltiptext">Enter the age in years (e.g., 45).</span>
-            </label>
-            <input id="age" name="Age" placeholder="Age" required="required">
-            <br>
-
-            <!-- Sex -->
-            <label for="sex" class="tooltip">Sex
-                <span class="tooltiptext">1 = Male, 0 = Female.</span>
-            </label>
-            <input id="sex" name="Gender" placeholder="Sex" required="required">
-            <br>
-
-            <!-- Total Bilirubin -->
-            <label for="bilirubin" class="tooltip">Total Bilirubin
-                <span class="tooltiptext">Enter the total bilirubin level (e.g., 0.5).</span>
-            </label>
-            <input id="bilirubin" name="Total_Bilirubin" placeholder="Total Bilirubin" required="required">
-            <br>
-
-            <!-- Alkaline Phosphotase -->
-            <label for="alkaline_phosphotase" class="tooltip">Alkaline Phosphotase
-                <span class="tooltiptext">Enter the alkaline phosphotase level (e.g., 85).</span>
-            </label>
-            <input id="alkaline_phosphotase" name="Alkaline_Phosphotase" placeholder="Alkaline Phosphotase" required="required">
-            <br>
-
-            <!-- Alamine Aminotransferase -->
-            <label for="alamine_aminotransferase" class="tooltip">Alamine Aminotransferase
-                <span class="tooltiptext">Enter the alamine aminotransferase level (e.g., 50).</span>
-            </label>
-            <input id="alamine_aminotransferase" name="Alamine_Aminotransferase" placeholder="Alamine Aminotransferase" required="required">
-            <br>
-
-            <!-- Aspartate Aminotransferase -->
-            <label for="aspartate_aminotransferase" class="tooltip">Aspartate Aminotransferase
-                <span class="tooltiptext">Enter the aspartate aminotransferase level (e.g., 50).</span>
-            </label>
-            <input id="aspartate_aminotransferase" name="Aspartate_Aminotransferase" placeholder="Aspartate Aminotransferase" required="required">
-            <br>
-
-            <!-- Total Protiens -->
-            <label for="total_proteins" class="tooltip">Total Proteins
-                <span class="tooltiptext">Enter the total proteins level (e.g., 7.2).</span>
-            </label>
-            <input id="total_proteins" name="Total_Protiens" placeholder="Total Proteins" required="required">
-            <br>
-
-            <!-- Albumin -->
-            <label for="albumin" class="tooltip">Albumin
-                <span class="tooltiptext">Enter the albumin level (e.g., 3.5).</span>
-            </label>
-            <input id="albumin" name="Albumin" placeholder="Albumin" required="required">
-            <br>
-
-            <!-- Albumin and Globulin Ratio -->
-            <label for="albumin_globulin_ratio" class="tooltip">Albumin and Globulin Ratio
-                <span class="tooltiptext">Enter the albumin and globulin ratio (e.g., 1.5).</span>
-            </label>
-            <input id="albumin_globulin_ratio" name="Albumin_and_Globulin_Ratio" placeholder="Albumin and Globulin Ratio" required="required">
-            <br>
-
-            <!-- Submit Button -->
             <button id="sub" type="submit">Submit</button>
+            <br><br>
         </form>
     </div>
-
 </body>
 
 </html>

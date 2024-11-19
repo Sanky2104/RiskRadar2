@@ -4,156 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Diabetes Prediction Model</title>
+    <style>
+        /* Background Image */
+        body {
+            background-image: url("https://www.shutterstock.com/image-vector/diabetes-blood-glucose-test-medicine-260nw-794416603.jpg");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
-</head>
-<body>
-    <div class="container">
-        <h2 class='container-heading'><span class="heading_font">Diabetes Prediction</span></h2>
-    </div>
+        /* Heading Font */
+        .container-heading {
+            margin: 0;
+        }
 
-    <div class="ml-container">
-        <form action="{{ url_for('predict') }}" method="POST">
-            <br>
-            <h3>Pregnancies</h3>
-            <input id="first" name="Pregnancies" placeholder="Number of Pregnancies" required="required">
-            <br>
-            <h3>Glucose</h3>
-            <input id="second" name="Glucose" placeholder="Glucose" required="required">
-            <br>
-            <h3>Blood Pressure</h3>
-            <input id="third" name="BloodPressure" placeholder="(mm Hg)" required="required">
-            <br>
-            <h3>Skin Thickness</h3>
-            <input id="fourth" name="SkinThickness" placeholder="(mm)" required="required">
-            <br>
-            <h3>Insulin</h3>
-            <input id="fifth" name="Insulin" placeholder="(mu U/ml)" required="required">
-            <br>
-            <h3>Body Mass Index</h3>
-            <input id="sixth" name="BMI" placeholder="weight in kg/(height in m)^2" required="required">
-            <br>
-            <h3>Diabetes Pedigree Function</h3>
-            <input id="seventh" name="DiabetesPedigreeFunction" placeholder="DPF" required="required">
-            <br>
-            <h3>Age</h3>
-            <input id="eight" name="Age" placeholder="In Years" required="required">
-            <br>
-            <br>
-            <br>
-            <button id="sub" type="submit ">Submit</button>
-            <br>
-            <br>
-            <h3>{{ prediction }}</h3>
-            <br>
-            <br>
+        .heading_font {
+            color: black;
+            font-family: 'Pacifico', cursive;
+            font-size: 50px;
+            font-weight: normal;
+        }
 
-        </form>
-    </div>
-
-
-
-
-<style>
-
-/* Background Image */
-body
-{
-background-image:url("https://mk0mydrtest3eri40dsq.kinstacdn.com/wp-content/uploads/2019/01/AdobeStock_331018077-scaled-1210x700.jpg");
-height: 100%;
-
-/* Center and scale the image nicely */
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-
-}
-
-/* Color */
-body{
-	font-family: Arial, Helvetica,sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-}
-
-
-/* Heading Font */
-.container-heading{
-    margin: 0;
-}
-
-.heading_font{
-    color: black;
-	font-family: 'Pacifico', cursive;
-	font-size: 50px;
-	font-weight: normal;
-}
-
-
-
-/* Box */
-        #first {
+        /* Input Box Styles */
+        input {
             border-radius: 14px;
             height: 25px;
             font-size: 20px;
             text-align: center;
         }
 
-        #second {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #third {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #fourth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #fifth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #sixth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #seventh {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #eight {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-/* Submit Button */
-#sub {
+        /* Submit Button */
+        #sub {
             width: 120px;
             height: 43px;
             text-align: center;
@@ -161,15 +51,122 @@ body{
             font-size: 18px;
         }
 
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
 
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above */
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
 
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
 
+        .tooltip .tooltiptext::after {
+            content: '';
+            position: absolute;
+            top: 100%; /* Arrow below the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+    </style>
+</head>
 
-</style>
+<body>
+    <div class="container">
+        <h2 class="container-heading">
+            <span class="heading_font">Diabetes Prediction</span>
+        </h2>
+    </div>
 
+    <div class="ml-container">
+        <form action="{{ url_for('predict') }}" method="POST">
+            <br>
 
+            <!-- Pregnancies -->
+            <h3 class="tooltip">Pregnancies
+                <span class="tooltiptext">Number of times the patient has been pregnant.</span>
+            </h3>
+            <input id="first" name="Pregnancies" placeholder="Number of Pregnancies" required="required">
+            <br>
+
+            <!-- Glucose -->
+            <h3 class="tooltip">Glucose
+                <span class="tooltiptext">The glucose level in the blood, measured in mg/dL.</span>
+            </h3>
+            <input id="second" name="Glucose" placeholder="Glucose" required="required">
+            <br>
+
+            <!-- Blood Pressure -->
+            <h3 class="tooltip">Blood Pressure
+                <span class="tooltiptext">Blood pressure value measured in millimeters of mercury (mm Hg).</span>
+            </h3>
+            <input id="third" name="BloodPressure" placeholder="(mm Hg)" required="required">
+            <br>
+
+            <!-- Skin Thickness -->
+            <h3 class="tooltip">Skin Thickness
+                <span class="tooltiptext">Thickness of the skin fold, measured in millimeters (mm).</span>
+            </h3>
+            <input id="fourth" name="SkinThickness" placeholder="(mm)" required="required">
+            <br>
+
+            <!-- Insulin -->
+            <h3 class="tooltip">Insulin
+                <span class="tooltiptext">The insulin level in the blood, measured in micro units per milliliter (mu U/ml).</span>
+            </h3>
+            <input id="fifth" name="Insulin" placeholder="(mu U/ml)" required="required">
+            <br>
+
+            <!-- BMI -->
+            <h3 class="tooltip">Body Mass Index (BMI)
+                <span class="tooltiptext">Body weight divided by height squared (kg/m²).</span>
+            </h3>
+            <input id="sixth" name="BMI" placeholder="weight in kg/(height in m)^2" required="required">
+            <br>
+
+            <!-- Diabetes Pedigree Function -->
+            <h3 class="tooltip">Diabetes Pedigree Function
+                <span class="tooltiptext">A score that indicates genetic risk of diabetes.</span>
+            </h3>
+            <input id="seventh" name="DiabetesPedigreeFunction" placeholder="DPF" required="required">
+            <br>
+
+            <!-- Age -->
+            <h3 class="tooltip">Age
+                <span class="tooltiptext">The age of the patient, measured in years.</span>
+            </h3>
+            <input id="eight" name="Age" placeholder="In Years" required="required">
+            <br><br><br>
+
+            <button id="sub" type="submit">Submit</button>
+            <br><br>
+
+            <h3>{{ prediction }}</h3>
+            <br><br>
+        </form>
+    </div>
 </body>
 
 </html>
-
-

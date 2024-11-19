@@ -14,62 +14,71 @@
     <div class="ml-container">
         <form action="{{ url_for('predict') }}" method="POST">
             <br>
-            <h3>Age</h3>
-            <div class="tooltip">
-                <input id="first" name="Age" placeholder="in Year" required="required" title="Enter the age in years (e.g., 45).">
+            <!-- Age -->
+            <h3 class="tooltip">Age
                 <span class="tooltiptext">Enter the age in years (e.g., 45).</span>
-            </div>
+            </h3>
+            <input id="first" name="Age" placeholder="in Year" required="required">
             <br>
-            <h3>Gender</h3>
-            <div class="tooltip">
-                <input id="second" name="Gender" placeholder="Male = 1, Female=0" required="required" title="Enter 1 for Male, 0 for Female.">
+
+            <!-- Gender -->
+            <h3 class="tooltip">Gender
                 <span class="tooltiptext">Enter 1 for Male, 0 for Female.</span>
-            </div>
+            </h3>
+            <input id="second" name="Gender" placeholder="Male = 1, Female = 0" required="required">
             <br>
-            <h3>Total Bilirubin</h3>
-            <div class="tooltip">
-                <input id="third" name="Total_Bilirubin" placeholder="Total Bilirubin" required="required" title="Enter the total bilirubin level (e.g., 0.5).">
+
+            <!-- Total Bilirubin -->
+            <h3 class="tooltip">Total Bilirubin
                 <span class="tooltiptext">Enter the total bilirubin level (e.g., 0.5).</span>
-            </div>
+            </h3>
+            <input id="third" name="Total_Bilirubin" placeholder="Total Bilirubin" required="required">
             <br>
-            <h3>Alkaline Phosphotase</h3>
-            <div class="tooltip">
-                <input id="fourth" name="Alkaline_Phosphotase" placeholder="Alkaline Phosphotase" required="required" title="Enter the alkaline phosphotase level (e.g., 85).">
+
+            <!-- Alkaline Phosphotase -->
+            <h3 class="tooltip">Alkaline Phosphotase
                 <span class="tooltiptext">Enter the alkaline phosphotase level (e.g., 85).</span>
-            </div>
+            </h3>
+            <input id="fourth" name="Alkaline_Phosphotase" placeholder="Alkaline Phosphotase" required="required">
             <br>
-            <h3>Alamine Aminotransferase</h3>
-            <div class="tooltip">
-                <input id="fifth" name="Alamine_Aminotransferase" placeholder="Alamine Aminotransferase" required="required" title="Enter the alamine aminotransferase level (e.g., 50).">
+
+            <!-- Alamine Aminotransferase -->
+            <h3 class="tooltip">Alamine Aminotransferase
                 <span class="tooltiptext">Enter the alamine aminotransferase level (e.g., 50).</span>
-            </div>
+            </h3>
+            <input id="fifth" name="Alamine_Aminotransferase" placeholder="Alamine Aminotransferase" required="required">
             <br>
-            <h3>Aspartate Aminotransferase</h3>
-            <div class="tooltip">
-                <input id="sixth" name="Aspartate_Aminotransferase" placeholder="Aspartate Aminotransferase" required="required" title="Enter the aspartate aminotransferase level (e.g., 50).">
+
+            <!-- Aspartate Aminotransferase -->
+            <h3 class="tooltip">Aspartate Aminotransferase
                 <span class="tooltiptext">Enter the aspartate aminotransferase level (e.g., 50).</span>
-            </div>
+            </h3>
+            <input id="sixth" name="Aspartate_Aminotransferase" placeholder="Aspartate Aminotransferase" required="required">
             <br>
-            <h3>Total Protiens</h3>
-            <div class="tooltip">
-                <input id="seventh" name="Total_Protiens" placeholder="Total Protiens" required="required" title="Enter the total proteins level (e.g., 7.2).">
+
+            <!-- Total Proteins -->
+            <h3 class="tooltip">Total Proteins
                 <span class="tooltiptext">Enter the total proteins level (e.g., 7.2).</span>
-            </div>
+            </h3>
+            <input id="seventh" name="Total_Protiens" placeholder="Total Proteins" required="required">
             <br>
-            <h3>Albumin</h3>
-            <div class="tooltip">
-                <input id="eight" name="Albumin" placeholder="Albumin" required="required" title="Enter the albumin level (e.g., 3.5).">
+
+            <!-- Albumin -->
+            <h3 class="tooltip">Albumin
                 <span class="tooltiptext">Enter the albumin level (e.g., 3.5).</span>
-            </div>
+            </h3>
+            <input id="eight" name="Albumin" placeholder="Albumin" required="required">
             <br>
-            <h3>Albumin and Globulin Ratio</h3>
-            <div class="tooltip">
-                <input id="ninth" name="Albumin_and_Globulin_Ratio" placeholder="Albumin and Globulin Ratio" required="required" title="Enter the albumin and globulin ratio (e.g., 1.5).">
+
+            <!-- Albumin and Globulin Ratio -->
+            <h3 class="tooltip">Albumin and Globulin Ratio
                 <span class="tooltiptext">Enter the albumin and globulin ratio (e.g., 1.5).</span>
-            </div>
+            </h3>
+            <input id="ninth" name="Albumin_and_Globulin_Ratio" placeholder="Albumin and Globulin Ratio" required="required">
             <br>
             <br>
             <br>
+
             <button id="sub" type="submit">Submit</button>
             <br>
             <br>
@@ -112,7 +121,7 @@
             font-weight: normal;
         }
 
-        /* Box */
+        /* Input Fields */
         input {
             border-radius: 14px;
             height: 25px;
@@ -123,41 +132,15 @@
             padding-left: 10px;
         }
 
-        #first {
-            width: 150px;
-        }
-
-        #second {
-            width: 220px;
-        }
-
-        #third {
-            width: 180px;
-        }
-
-        #fourth {
-            width: 250px;
-        }
-
-        #fifth {
-            width: 270px;
-        }
-
-        #sixth {
-            width: 280px;
-        }
-
-        #seventh {
-            width: 170px;
-        }
-
-        #eight {
-            width: 150px;
-        }
-
-        #ninth {
-            width: 280px;
-        }
+        #first { width: 150px; }
+        #second { width: 220px; }
+        #third { width: 180px; }
+        #fourth { width: 250px; }
+        #fifth { width: 270px; }
+        #sixth { width: 280px; }
+        #seventh { width: 170px; }
+        #eight { width: 150px; }
+        #ninth { width: 280px; }
 
         /* Tooltip Styling */
         .tooltip {
@@ -177,7 +160,7 @@
             border-radius: 5px;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Position above the input */
+            bottom: 125%;
             left: 50%;
             margin-left: -100px;
             opacity: 0;
@@ -189,7 +172,6 @@
             opacity: 1;
         }
 
-        /* Tooltip Arrow */
         .tooltiptext::after {
             content: "";
             position: absolute;
@@ -215,13 +197,11 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        /* Hover Effect for Submit Button */
         #sub:hover {
             background-color: #45a049;
-            transform: scale(1.05); /* Button grows on hover */
+            transform: scale(1.05);
         }
 
-        /* Button active effect */
         #sub:active {
             transform: scale(0.95);
         }
